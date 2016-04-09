@@ -55,7 +55,6 @@ def getbible(ref):
             "text": ""
         }
 
-        print(response["book"][0]["chapter"])
         for versenum, verseitem in response["book"][0]["chapter"].items():
             output["text"] += versenum + verseitem["verse"] + " "
 
