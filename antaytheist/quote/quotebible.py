@@ -4,6 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 
 from ..util.bible import bibfullref
+from .aliasbible import aliases
 
 def biblegateway(ref):
     searchstr = ref["book"] + " " + ref["chapter"]
@@ -55,7 +56,8 @@ def getbible(ref):
             "text": ""
         }
 
-        for versenum, verseitem in response["book"][0]["chapter"].items():
+        # sorted ensures that we get the verses in order
+        for versenum, verseitem in sorted(response["book"][0]["chapter"].items()):
             output["text"] += versenum + verseitem["verse"] + " "
 
     except Exception: # would be nice to narrow this down
@@ -69,7 +71,11 @@ biblesources = [
 ]
 
 def quote(args):
-    ref = bibfullref(args[0])
+    if args[0].lower() in aliases:
+        ref = bibfullref(aliases[args[0].lower()])
+    else:
+        ref = bibfullref(args[0])
+
     if ref["success"] == False:
         return ref
 
