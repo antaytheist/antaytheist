@@ -5,10 +5,12 @@ import re
 # antaytheist imports
 from . import quotebible
 from . import quotepeople
+from . import quotefallacy
 
 second2func = {
     "bible": quotebible.quote,
     "people": quotepeople.quote,
+    "fallacy": quotefallacy.quote,
 }
 
 def quote(args):
