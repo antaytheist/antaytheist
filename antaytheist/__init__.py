@@ -6,14 +6,10 @@ import shlex
 from . import contra
 from . import quote
 
-def antayprint(args):
-    return {"text": str(args), "success": True}
-
 command2func = {
     "contra": contra.contra,
     "contradict": contra.contra,
     "quote": quote.quote,
-    "print": antayprint,
 }
 
 def do(command):
@@ -27,9 +23,8 @@ def do(command):
     if lexcmd[0] not in command2func:
         return {"finalsuccess": False, "main": {"error": 'Invalid function "' + lexcmd[0] + '"', "success": False}}
 
-    if lexcmd[0] != "print":
-        if len(lexcmd) < 3:
-            return {"finalsuccess": False, "main": {"error": "Too few arguments given", "success": False}}
+    if len(lexcmd) < 3:
+        return {"finalsuccess": False, "main": {"error": "Too few arguments given", "success": False}}
 
     response["main"] = command2func[lexcmd[0]](lexcmd[1:])
     response["finalsuccess"] = response["main"]["success"]
