@@ -26,6 +26,6 @@ def quote(args):
             "text": re.sub("&nbsp;", " ", myfallacy["description"]) + "\n\n" + myfallacy["exampleText"]
         },
         "source": {
-            "name": "your logical fallacy is", "src": "https://yourlogicalfallacyis.com/"
+            "name": "your logical fallacy is", "url": "https://yourlogicalfallacyis.com/"
         }
     }
