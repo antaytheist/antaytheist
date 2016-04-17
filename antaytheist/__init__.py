@@ -20,16 +20,16 @@ def do(command):
     try:
         lexcmd = shlex.split(command)
     except Exception as e:
-        return {"success": False, "error": str(e)}
+        return {"finalsuccess": False, "main": {"error": str(e), "success": False}}
 
     response = {}
 
     if lexcmd[0] not in command2func:
-        return {"success": False, "error": 'Invalid function "' + lexcmd[0] + '"'}
+        return {"finalsuccess": False, "main": {"error": 'Invalid function "' + lexcmd[0] + '"', "success": False}}
 
     if lexcmd[0] != "print":
         if len(lexcmd) < 3:
-            return {"success": False, "error": "Too few arguments given"}
+            return {"finalsuccess": False, "main": {"error": "Too few arguments given", "success": False}}
 
     response["main"] = command2func[lexcmd[0]](lexcmd[1:])
     response["finalsuccess"] = response["main"]["success"]
